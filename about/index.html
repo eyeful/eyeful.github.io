@@ -99,7 +99,7 @@
   <meta name="description" content="我是小兵，又懒又笨。     涉猎广泛，少有精专；思维敏捷，反应迟钝。     喜欢瞎琢磨,喜欢动手,喜欢各种有趣的东西。      写此博客为了记录自己的一点东西,就像一个云书签,怕以后忘了,想找的时候好找所以放在了网络上,同时别人问我点儿什么事的时候可以直接丢链接。 与我相关： 我的oneindex 我的软件分享主页 弃用  我的小小书签集      酷安@懒而笨的小兵    我的choos">
 <meta property="og:type" content="website">
 <meta property="og:title" content="choose">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta property="og:url" content="eyeful,github.io/about/index.html">
 <meta property="og:site_name" content="choose">
 <meta property="og:description" content="我是小兵，又懒又笨。     涉猎广泛，少有精专；思维敏捷，反应迟钝。     喜欢瞎琢磨,喜欢动手,喜欢各种有趣的东西。      写此博客为了记录自己的一点东西,就像一个云书签,怕以后忘了,想找的时候好找所以放在了网络上,同时别人问我点儿什么事的时候可以直接丢链接。 与我相关： 我的oneindex 我的软件分享主页 弃用  我的小小书签集      酷安@懒而笨的小兵    我的choos">
 <meta property="og:locale" content="zh-CN">
@@ -113,7 +113,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/">
+  <link rel="canonical" href="eyeful,github.io/about/">
 
 
 
@@ -130,6 +130,16 @@
 
 
 
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f809337c45c8c65a6a09e8a16b515d1b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -243,6 +253,23 @@
         
         
           
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-archives">
 
     
@@ -286,6 +313,9 @@
             
 
     
+    
+      
+      
     
       
       
@@ -635,6 +665,74 @@
 
 
   
+  
+  <script>
+    
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'Jh78lKhP2wVjWQNgxupc2d57-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'Jh78lKhP2wVjWQNgxupc2d57-gzGzoHsz',
+                'X-LC-Key': 'NMBeEkCWVQBQLtyQyuqNDxhC',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
+    });
+  </script>
+
+
 
   
 

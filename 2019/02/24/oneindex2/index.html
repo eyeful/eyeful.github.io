@@ -100,7 +100,7 @@
 <meta name="keywords" content="oneindex">
 <meta property="og:type" content="article">
 <meta property="og:title" content="再谈免费搭建oneindex">
-<meta property="og:url" content="http://yoursite.com/2019/02/24/oneindex2/index.html">
+<meta property="og:url" content="eyeful,github.io/2019/02/24/oneindex2/index.html">
 <meta property="og:site_name" content="choose">
 <meta property="og:description" content="几个月前用now和heroku免费部署过oneindex，后来now升级了heroku也有限制。等等各种原因吧上面两个都用着不爽（免费的还嫌不爽），经过断断续续四五天的筛选和测试又发现了几个不错的方法。。。层层筛选是真的累呀。以下途径不分先后，只是个人建议。">
 <meta property="og:locale" content="zh-CN">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/24/oneindex2/">
+  <link rel="canonical" href="eyeful,github.io/2019/02/24/oneindex2/">
 
 
 
@@ -137,6 +137,16 @@
 
 
 
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f809337c45c8c65a6a09e8a16b515d1b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -250,6 +260,23 @@
         
         
           
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-archives">
 
     
@@ -312,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/oneindex2/">
+    <link itemprop="mainEntityOfPage" href="eyeful,github.io/2019/02/24/oneindex2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiao bing">
@@ -385,6 +412,17 @@
           
 
           
+          
+            <span id="/2019/02/24/oneindex2/" class="leancloud_visitors" data-flag-title="再谈免费搭建oneindex">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
 
           
@@ -795,6 +833,66 @@
 
 
   
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'Jh78lKhP2wVjWQNgxupc2d57-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'Jh78lKhP2wVjWQNgxupc2d57-gzGzoHsz',
+                'X-LC-Key': 'NMBeEkCWVQBQLtyQyuqNDxhC',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
 
   
 
