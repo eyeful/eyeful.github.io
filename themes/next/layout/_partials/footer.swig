@@ -38,7 +38,7 @@
 </div>
 
 {% if theme.footer.powered.enable %}
-  <div class="powered-by">{#
+  <!-- <div class="powered-by">{#
   #}{{ __('footer.powered', next_url('https://hexo.io', 'Hexo', {class: 'theme-link'})) }}{#
   #}{% if theme.footer.powered.version %} v{{ hexo_env('version') }}{% endif %}{#
  #}</div>
@@ -53,6 +53,7 @@
   #}{{ __('footer.theme') }} – {{ next_url('https://theme-next.org', 'NexT.' + theme.scheme, {class: 'theme-link'}) }}{#
   #}{% if theme.footer.theme.version %} v{{ version }}{% endif %}{#
 #}</div>
+-->
 {% endif %}
 
 {% if theme.footer.custom_text %}
